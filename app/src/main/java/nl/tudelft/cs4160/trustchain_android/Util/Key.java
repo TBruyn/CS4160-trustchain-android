@@ -161,8 +161,9 @@ public class Key {
         if(key == null) {
             return null;
         }
-        Log.i(TAG, "PUBLIC FROM FILE: " + key);
-        return loadPublicKey(key);
+        Log.i(TAG, "Loaded public key from file: " + key);
+        byte[] rawKey = Base64.decode(key, Base64.DEFAULT);
+        return loadPublicKey(rawKey);
     }
 
 
@@ -171,15 +172,13 @@ public class Key {
      * @param key The base64 encoded key.
      * @return Public key
      */
-    public static PublicKey loadPublicKey(String key) {
+    public static PublicKey loadPublicKey(byte[] key) {
         KeyFactory kf = getKeyFactory();
         if(kf == null) {
             return null;
         }
 
-        byte[] rawKey = Base64.decode(key, Base64.DEFAULT);
-        X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(rawKey);
-
+        X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(key);
         try {
             return kf.generatePublic(pubKeySpec);
         } catch (InvalidKeySpecException e) {
@@ -200,7 +199,8 @@ public class Key {
             return null;
         }
         Log.i(TAG, "PRIVATE FROM FILE: " + key);
-        return loadPrivateKey(key);
+        byte[] rawKey = Base64.decode(key, Base64.DEFAULT);
+        return loadPrivateKey(rawKey);
     }
 
     /**
@@ -208,14 +208,12 @@ public class Key {
      * @param key The base64 encoded key
      * @return The private key
      */
-    public static PrivateKey loadPrivateKey(String key) {
+    public static PrivateKey loadPrivateKey(byte[] key) {
         KeyFactory kf = getKeyFactory();
         if(kf == null) {
             return null;
         }
-
-        byte[] rawKey = Base64.decode(key, Base64.DEFAULT);
-        PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(rawKey);
+        PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(key);
         try {
             return kf.generatePrivate(ks);
         } catch (InvalidKeySpecException e) {
