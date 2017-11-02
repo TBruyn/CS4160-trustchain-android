@@ -168,8 +168,8 @@ public class Key {
 
 
     /**
-     * Load a raw base64 encoded key.
-     * @param key The base64 encoded key.
+     * Create a PublicKey from a raw X509 byte encoded key.
+     * @param key The byte encoded key.
      * @return Public key
      */
     public static PublicKey loadPublicKey(byte[] key) {
@@ -198,14 +198,14 @@ public class Key {
         if(key == null) {
             return null;
         }
-        Log.i(TAG, "PRIVATE FROM FILE: " + key);
+        Log.i(TAG, "Loaded private key from file: " + key);
         byte[] rawKey = Base64.decode(key, Base64.DEFAULT);
         return loadPrivateKey(rawKey);
     }
 
     /**
-     * Load a private key from a base64 encoded string
-     * @param key The base64 encoded key
+     * Create a PrivateKey from a PKCS8 encoded key
+     * @param key The byte encoded key
      * @return The private key
      */
     public static PrivateKey loadPrivateKey(byte[] key) {
