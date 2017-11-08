@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
 
+import org.spongycastle.jce.interfaces.ECPublicKey;
+
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -406,7 +408,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public byte[] getMyPublicKey() {
-        return kp.getPublic().getEncoded();
+        return Key.getQ(kp.getPublic());
     }
 
 
