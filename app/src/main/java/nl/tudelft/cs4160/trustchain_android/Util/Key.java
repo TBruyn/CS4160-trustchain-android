@@ -37,7 +37,6 @@ import java.security.spec.X509EncodedKeySpec;
 import nl.tudelft.cs4160.trustchain_android.Peer;
 
 /**
- * Created by rico on 14-9-17.
  * Manages key operations.
  */
 public class Key {
