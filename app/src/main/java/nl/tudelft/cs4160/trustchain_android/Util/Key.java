@@ -256,6 +256,11 @@ public class Key {
         return Util.writeToFile(context, file, Base64.encodeToString(key.getEncoded(), Base64.DEFAULT));
     }
 
+    /**
+     * Load a public key from the point Q
+     * @param rawQ The byte[] encoded Q
+     * @return Public key
+     */
     public static PublicKey loadCurve25519FromQ(byte[] rawQ) {
         ECParameterSpec ecSpec = getParameterSpec("curve25519", true);
         ECPublicKeySpec pubKeySpec = new ECPublicKeySpec(ecSpec.getCurve().decodePoint(rawQ), ecSpec);
@@ -269,6 +274,11 @@ public class Key {
 
     }
 
+    /**
+     * Get point Q from an Elliptic Curve public key
+     * @param pk The public key
+     * @return Byte array encoded point Q
+     */
     public static byte[] getQ(PublicKey pk) {
         if(pk instanceof ECPublicKey)
             return ((ECPublicKey)pk).getQ().getEncoded(false);
