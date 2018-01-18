@@ -41,6 +41,7 @@ import nl.tudelft.cs4160.trustchain_android.connection.CommunicationListener;
 import nl.tudelft.cs4160.trustchain_android.connection.network.NetworkCommunication;
 import nl.tudelft.cs4160.trustchain_android.database.TrustChainDBHelper;
 import nl.tudelft.cs4160.trustchain_android.message.MessageProto;
+import nl.tudelft.cs4160.trustchain_android.appToApp.KeyRecoveryHandler;
 
 public class TrustChainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener, CommunicationListener {
 
@@ -185,6 +186,7 @@ public class TrustChainActivity extends AppCompatActivity implements CompoundBut
         switch (item.getItemId()) {
             case R.id.chain_menu:
                 Intent chainExplorerActivity = new Intent(this, ChainExplorerActivity.class);
+                startActivityForResult(chainExplorerActivity,0);
                 startActivity(chainExplorerActivity);
                 return true;
             case R.id.close:
@@ -194,6 +196,8 @@ public class TrustChainActivity extends AppCompatActivity implements CompoundBut
                 } else {
                     Toast.makeText(getApplicationContext(), "Requires at least API 19 (KitKat)", Toast.LENGTH_LONG).show();
                 }
+            case R.id.launch_key_recovery:
+                return new KeyRecoveryHandler().startPassbuddies(this);
             default:
                 return true;
         }

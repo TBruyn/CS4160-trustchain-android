@@ -46,6 +46,7 @@ import nl.tudelft.cs4160.trustchain_android.SharedPreferences.SharedPreferencesS
 import nl.tudelft.cs4160.trustchain_android.SharedPreferences.UserNameStorage;
 import nl.tudelft.cs4160.trustchain_android.SharedPreferences.PubKeyAndAddressPairStorage;
 import nl.tudelft.cs4160.trustchain_android.Util.Key;
+import nl.tudelft.cs4160.trustchain_android.appToApp.KeyRecoveryHandler;
 import nl.tudelft.cs4160.trustchain_android.appToApp.PeerAppToApp;
 import nl.tudelft.cs4160.trustchain_android.appToApp.PeerList;
 import nl.tudelft.cs4160.trustchain_android.appToApp.connection.WanVote;
@@ -145,6 +146,9 @@ public class OverviewConnectionsActivity extends AppCompatActivity {
             case R.id.find_peer:
                 Intent bootstrapActivity = new Intent(this, BootstrapActivity.class);
                 startActivityForResult(bootstrapActivity, 1);
+                return true;
+            case R.id.launch_key_recovery:
+                return new KeyRecoveryHandler().startPassbuddies(this);
             default:
                 return true;
         }

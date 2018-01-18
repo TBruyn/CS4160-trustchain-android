@@ -14,4 +14,8 @@
         android:id="@+id/find_peer"
         android:title="@string/find_peer"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/launch_key_recovery"
+        android:title="@string/menu_launch_key_recovery"
+        app:showAsAction="never" />
 </menu>
